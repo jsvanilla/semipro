@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ContinentBuilder" load_steps=4 format=3 uid="uid://dtghhxby8vsw1"]
+
+[ext_resource type="Script" uid="uid://dexg8nvs46rav" path="res://scripts/continent_builder.gd" id="1_4tii8"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qhbuw"]
+frequency = 0.042
+offset = Vector3(0, 51.72, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4k74i"]
+noise_type = 0
+frequency = 0.0552
+
+[resource]
+script = ExtResource("1_4tii8")
+noise = SubResource("FastNoiseLite_4k74i")
+low_freq_noise = SubResource("FastNoiseLite_qhbuw")
+width = 40
+height = 30
+scale = Vector2(1.5, 1.5)
+warmth = 0.1
+wetness = 0.0
+rand_seed = 0
+num_plates = 10
+plate_pressure_radius = 5

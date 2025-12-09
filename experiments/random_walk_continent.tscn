@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://du0qq6l1troxg"]
+
+[ext_resource type="Script" uid="uid://deupgjiia8yea" path="res://experiments/random_walk_continent.gd" id="1_pwxah"]
+
+[node name="RandomWalkContinent" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pwxah")
+
+[node name="bn_generate" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Generate"
+
+[connection signal="pressed" from="bn_generate" to="." method="_on_bn_generate_pressed"]

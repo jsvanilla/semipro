@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdrsdm2nnwcmi"]
+
+[ext_resource type="Script" uid="uid://87ngjpb3klbo" path="res://scenes/continent_creator_entry.gd" id="1_in5pe"]
+
+[node name="continent_creator_entry" type="HBoxContainer"]
+script = ExtResource("1_in5pe")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Path"
+
+[node name="bn_up" type="Button" parent="."]
+layout_mode = 2
+text = "^"
+
+[node name="bn_down" type="Button" parent="."]
+layout_mode = 2
+text = "V"
+
+[node name="bn_delete" type="Button" parent="."]
+layout_mode = 2
+text = "X"
+
+[connection signal="pressed" from="bn_up" to="." method="_on_bn_up_pressed"]
+[connection signal="pressed" from="bn_down" to="." method="_on_bn_down_pressed"]
+[connection signal="pressed" from="bn_delete" to="." method="_on_bn_delete_pressed"]

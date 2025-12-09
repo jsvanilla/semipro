@@ -1,0 +1,28 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dbwq3633q0er3"]
+
+[ext_resource type="Texture2D" uid="uid://d12f365cjwii8" path="res://tilesets/iso_32x32/desert_layer.png" id="1_4imnk"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gy8q4"]
+texture = ExtResource("1_4imnk")
+texture_region_size = Vector2i(32, 32)
+0:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+1:1/0 = 0
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+
+[resource]
+tile_shape = 1
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_gy8q4")

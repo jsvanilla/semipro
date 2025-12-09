@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=3 uid="uid://mlc6yr38r4vq"]
+
+[ext_resource type="PackedScene" uid="uid://bdrsdm2nnwcmi" path="res://scenes/continent_creator_entry.tscn" id="1_8chvk"]
+[ext_resource type="Script" uid="uid://b1x3tcdlxgd77" path="res://scenes/world_assembler_panel.gd" id="1_sexp4"]
+
+[node name="World Assembler" type="VBoxContainer"]
+size_flags_vertical = 3
+script = ExtResource("1_sexp4")
+metadata/_tab_index = 2
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 2
+
+[node name="Label2" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Width"
+
+[node name="spin_width" type="SpinBox" parent="GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Height"
+
+[node name="spin_height" type="SpinBox" parent="GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Seed"
+
+[node name="spin_seed" type="SpinBox" parent="GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="continent_slots" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="continent_slots"]
+layout_mode = 2
+
+[node name="creator_list" type="VBoxContainer" parent="continent_slots/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="continent_creator_entry" parent="continent_slots/PanelContainer/creator_list" instance=ExtResource("1_8chvk")]
+layout_mode = 2
+
+[node name="bn_add_entry" type="Button" parent="continent_slots"]
+layout_mode = 2
+text = "Add Continent Generator"
+
+[node name="bn_generate" type="Button" parent="continent_slots"]
+layout_mode = 2
+text = "Generate"
+
+[node name="FileDialog_load" type="FileDialog" parent="."]
+unique_name_in_owner = true
+auto_translate_mode = 1
+title = "Open File(s)"
+ok_button_text = "Open"
+file_mode = 1
+filters = PackedStringArray("*.tres")
+
+[connection signal="value_changed" from="GridContainer/spin_width" to="." method="_on_spin_width_value_changed"]
+[connection signal="value_changed" from="GridContainer/spin_height" to="." method="_on_spin_height_value_changed"]
+[connection signal="value_changed" from="GridContainer/spin_seed" to="." method="_on_spin_seed_value_changed"]
+[connection signal="pressed" from="continent_slots/bn_add_entry" to="." method="_on_bn_add_entry_pressed"]
+[connection signal="pressed" from="continent_slots/bn_generate" to="." method="_on_bn_generate_pressed"]
+[connection signal="files_selected" from="FileDialog_load" to="." method="_on_file_dialog_load_files_selected"]

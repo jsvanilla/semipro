@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5v6x2ndnyahd"]
+
+[ext_resource type="Script" uid="uid://c8ntnvdw1vp5s" path="res://scenes/paint_panel.gd" id="1_m32bi"]
+[ext_resource type="ButtonGroup" uid="uid://ivukqt8timpn" path="res://scenes/bn_group_tools.tres" id="2_vgq0w"]
+
+[node name="Paint" type="VBoxContainer"]
+script = ExtResource("1_m32bi")
+metadata/_tab_index = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="bn_move" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("2_vgq0w")
+text = "Move"
+
+[node name="bn_paint" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_vgq0w")
+text = "Paint"
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Terrain"
+
+[node name="option_terrain" type="OptionButton" parent="GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Terrain"
+
+[node name="option_vegetation" type="OptionButton" parent="GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Terrain"
+
+[node name="option_feature" type="OptionButton" parent="GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Terrain"
+
+[node name="spin_height" type="SpinBox" parent="GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[connection signal="pressed" from="HBoxContainer/bn_move" to="." method="_on_bn_move_pressed"]
+[connection signal="pressed" from="HBoxContainer/bn_paint" to="." method="_on_bn_paint_pressed"]
+[connection signal="item_selected" from="GridContainer/option_terrain" to="." method="_on_option_terrain_item_selected"]
+[connection signal="item_selected" from="GridContainer/option_vegetation" to="." method="_on_option_vegetation_item_selected"]
+[connection signal="item_selected" from="GridContainer/option_feature" to="." method="_on_option_feature_item_selected"]
+[connection signal="value_changed" from="GridContainer/spin_height" to="." method="_on_spin_height_value_changed"]

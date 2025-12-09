@@ -1,0 +1,57 @@
+[gd_resource type="Shader" format=3 uid="uid://diok3hrf3k1j"]
+
+[resource]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
+
+group_uniforms tile;
+uniform sampler2D tile_source_albedo : source_color, filter_nearest;
+uniform sampler2D index_map : filter_nearest, repeat_disable, hint_default_black;
+uniform int tile_map_width = 1;
+uniform int tile_map_height = 1;
+uniform int index_map_width = 1;
+uniform int index_map_height = 1;
+
+
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+
+void vertex() {
+	UV = UV * uv1_scale.xy + uv1_offset.xy;
+}
+
+// within_tile_uv - Value on [0 1] for uv offset within tile
+vec4 read_tile_pixel(ivec2 tile_map_size, ivec2 tile_coord, vec2 within_tile_uv, sampler2D tex) {
+	vec2 near = (vec2(tile_coord) + within_tile_uv) / vec2(tile_map_size);
+//	return texture(tex, near);
+	return texture(tex, (vec2(tile_coord) + within_tile_uv) / vec2(tile_map_size));
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+	
+//		ALBEDO = vec3(1.0, 0.0, 0.0);
+
+//		ALBEDO = vec3(base_uv, 0.0);
+		
+		//ivec2 index_uv = ivec2(int(base_uv.x * float(index_map_width)), int(base_uv.y * float(index_map_height)));
+		//vec3 col = vec3(float(index_uv.x) / 10.0, float(index_uv.y) / 10.0, 0.0);
+		//ALBEDO = col;
+		//vec2 
+		
+	ivec2 index_uv = ivec2(base_uv * vec2(ivec2(index_map_width, index_map_height)));
+	ivec2 cell_coord = ivec2(texelFetch(index_map, index_uv, 0).xy);
+	
+	vec2 within_tile_uv = (base_uv - vec2(index_uv) / vec2(ivec2(index_map_width, index_map_height))) * vec2(ivec2(index_map_width, index_map_height));
+
+//		vec3 col = vec3(float(cell_idx.x) / (10.0), float(cell_idx.y) / 10.0, 0.0);
+//		vec3 col = vec3(within_tile_uv.x, within_tile_uv.y, 0.0);
+	vec3 col = read_tile_pixel(ivec2(tile_map_width, tile_map_height), cell_coord, within_tile_uv, tile_source_albedo).xyz;
+	ALBEDO = col;
+		
+}
+
+"

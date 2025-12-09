@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkv5lsa8wnq4b"]
+
+[ext_resource type="Material" uid="uid://dmv1hirlq2whp" path="res://materials/tile_map_material.tres" id="1_an3gc"]
+[ext_resource type="Script" uid="uid://cy8cbmvpyv30s" path="res://scenes/3d_shader_test/generator_world.gd" id="1_n76im"]
+[ext_resource type="TileSet" uid="uid://dfkh5hec5x3pj" path="res://tilesets/world_map_tile_set.tres" id="2_ksd68"]
+[ext_resource type="Resource" uid="uid://dtghhxby8vsw1" path="res://resources/continent_builder_0.tres" id="3_upfc4"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ao1r1"]
+
+[node name="GeneratorWorld" type="Node3D"]
+script = ExtResource("1_n76im")
+tile_set = ExtResource("2_ksd68")
+continent_builder = ExtResource("3_upfc4")
+
+[node name="world_plane" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0691924, 0)
+material_override = ExtResource("1_an3gc")
+mesh = SubResource("PlaneMesh_ao1r1")
+
+[node name="Button" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Make Map
+"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.0209773, 0.99978, 0, -0.99978, 0.0209773, 0, 1.57286, 0.0264863)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

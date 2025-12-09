@@ -1,0 +1,417 @@
+[gd_scene load_steps=23 format=4 uid="uid://iqlqp6ur1k8w"]
+
+[ext_resource type="Script" uid="uid://3fbs1buv0idb" path="res://scenes/tile_map_generator.gd" id="1_1eqje"]
+[ext_resource type="Texture2D" uid="uid://8okg86avaqq7" path="res://assets/texture/bioime_table.png" id="2_243sj"]
+[ext_resource type="Script" uid="uid://dexg8nvs46rav" path="res://scripts/continent_builder.gd" id="2_wugi1"]
+[ext_resource type="Texture2D" uid="uid://c133fgtfa3rnb" path="res://tilesets/iso_32x32/continent.png" id="4_4j5fe"]
+[ext_resource type="Texture2D" uid="uid://dnt2e4m6gwwj3" path="res://tilesets/iso_32x32/desert_layer.png" id="5_kdi3l"]
+[ext_resource type="Texture2D" uid="uid://dkhrl1fjy7h8l" path="res://tilesets/iso_32x32/grass_layer.png" id="6_qkl76"]
+[ext_resource type="Texture2D" uid="uid://c1krwhq7ib0ff" path="res://tilesets/iso_32x32/features.png" id="7_6gh0e"]
+[ext_resource type="PackedScene" uid="uid://c5v6x2ndnyahd" path="res://scenes/paint_panel.tscn" id="8_kdi3l"]
+[ext_resource type="PackedScene" uid="uid://mlc6yr38r4vq" path="res://scenes/world_assembler_panel.tscn" id="9_qkl76"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jbqbs"]
+frequency = 0.042
+offset = Vector3(0, 51.72, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_u57ht"]
+frequency = 0.1055
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qvodu"]
+noise_type = 0
+frequency = 0.0552
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yrlek"]
+frequency = 0.1055
+
+[sub_resource type="Resource" id="Resource_jpq1i"]
+script = ExtResource("2_wugi1")
+noise = SubResource("FastNoiseLite_qvodu")
+low_freq_noise = SubResource("FastNoiseLite_jbqbs")
+temperature_noise = SubResource("FastNoiseLite_yrlek")
+moisture_noise = SubResource("FastNoiseLite_u57ht")
+width = 40
+height = 80
+scale = Vector2(1, 1)
+terrain_height_scalar = 1.0
+warmth = 0.1
+wetness = 0.0
+land_fraction = 0.3
+distortion_amount = 1.0
+mountain_height = 0.55
+hill_height = 0.35
+rand_seed = 0
+biome_table = ExtResource("2_243sj")
+num_plates = 10
+plate_pressure_radius = 3
+use_circle_mask = true
+circle_mask_radius_inner = 0.6
+circle_mask_radius_outer = 1.0
+circle_mask_value_min = -1.0
+circle_mask_value_max = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hf2bf"]
+texture = ExtResource("4_4j5fe")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_n0ugx"]
+tile_shape = 1
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_hf2bf")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_brjdk"]
+texture = ExtResource("5_kdi3l")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_r4i44"]
+tile_shape = 1
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_brjdk")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ksrtc"]
+texture = ExtResource("6_qkl76")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_oa3ij"]
+tile_shape = 1
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_ksrtc")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r5cl8"]
+texture = ExtResource("7_6gh0e")
+texture_region_size = Vector2i(32, 64)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 16)
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, 16)
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, 16)
+0:1/0 = 0
+0:1/0/texture_origin = Vector2i(0, 16)
+0:2/0 = 0
+0:2/0/texture_origin = Vector2i(0, 16)
+
+[sub_resource type="TileSet" id="TileSet_lwf3l"]
+tile_shape = 1
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_r5cl8")
+
+[node name="TileMapGenerator" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1eqje")
+continent_builder = SubResource("Resource_jpq1i")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 600
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HSplitContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="HSplitContainer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(600, 648)
+render_target_update_mode = 4
+
+[node name="tilemaps" type="Node2D" parent="HSplitContainer/SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
+
+[node name="corners" type="Node2D" parent="HSplitContainer/SubViewportContainer/SubViewport/tilemaps"]
+
+[node name="continent" type="TileMapLayer" parent="HSplitContainer/SubViewportContainer/SubViewport/tilemaps/corners"]
+unique_name_in_owner = true
+tile_map_data = PackedByteArray("AAAEABIAAAAAAAAAAAAEABEAAAAAAAAAAAAFABAAAAAAAAAAAAAFABEAAAAAAAAAAAAFAA8AAAAAAAAAAAAFAA4AAAAAAAAAAAAEAA8AAAAAAAAAAAAEAA0AAAAAAAAAAAAFAA0AAAAAAAAAAAAGAA4AAAAAAAAAAAAGAA8AAAAAAAAAAAAGABAAAAAAAAAAAAAGABEAAAAAAAAAAAAGABIAAAAAAAAAAAAGABMAAAAAAAAAAAAHABQAAAAAAAAAAAAHABIAAAAAAAAAAAAFABIAAAAAAAAAAAAFABMAAAAAAAAAAAAFABQAAAAAAAAAAAAEABUAAAAAAAAAAAAEABQAAAAAAAAAAAAEABMAAAAAAAAAAAAFABUAAAAAAAAAAAAGABQAAAAAAAAAAAAGABUAAAAAAAAAAAAGABYAAAAAAAAAAAAGABcAAAAAAAAAAAAHAA4AAAABAAEAAAAGAA0AAAABAAEAAAAGAAwAAAABAAEAAAAFAAwAAAAAAAMAAAAEAA4AAAABAAMAAAAEABAAAAABAAMAAAAEAAwAAAAAAAEAAAADABMAAAABAAMAAAAHABMAAAACAAMAAAAHABYAAAACAAMAAAAHABAAAAACAAMAAAAHAA8AAAACAAIAAAAFAAsAAAAAAAIAAAAEAAsAAAAAAAIAAAAHABUAAAADAAEAAAAIABQAAAACAAIAAAAFABYAAAADAAMAAAAFABcAAAACAAEAAAAGABgAAAACAAEAAAAHABgAAAADAAEAAAAHABcAAAACAAIAAAAGABkAAAACAAAAAAAEABcAAAADAAIAAAADAA0AAAABAAIAAAADAA8AAAABAAIAAAADABIAAAABAAIAAAADABEAAAAAAAEAAAAEABYAAAACAAEAAAADABUAAAACAAEAAAADABQAAAABAAIAAAAHABEAAAABAAEAAAAIABIAAAACAAIAAAAFABgAAAABAAAAAAAFABkAAAABAAAAAAAGABoAAAAAAAEAAAAGABsAAAAAAAAAAAAGABwAAAABAAMAAAAFABsAAAABAAIAAAAFABoAAAABAAAAAAAEABkAAAABAAAAAAADABkAAAABAAAAAAAEABgAAAABAAAAAAADABcAAAABAAAAAAADABYAAAABAAAAAAACABUAAAABAAAAAAACABQAAAABAAAAAAACABMAAAABAAAAAAACABIAAAABAAAAAAACABEAAAABAAAAAAACABAAAAABAAAAAAACAA8AAAABAAAAAAADABAAAAABAAAAAAADAA4AAAABAAAAAAACAA0AAAABAAAAAAADAAwAAAABAAAAAAACAAsAAAABAAAAAAADAAoAAAABAAAAAAADAAkAAAABAAAAAAAEAAgAAAABAAAAAAADAAsAAAABAAAAAAAEAAoAAAABAAAAAAAEAAkAAAABAAAAAAAFAAoAAAABAAAAAAAFAAkAAAABAAAAAAAFAAgAAAABAAAAAAAGAAgAAAABAAAAAAAGAAkAAAABAAAAAAAHAAoAAAABAAAAAAAGAAsAAAABAAAAAAAGAAoAAAABAAAAAAAHAAwAAAABAAAAAAAHAAsAAAABAAAAAAAIAAwAAAABAAAAAAAIAA0AAAABAAIAAAAJAA4AAAABAAMAAAAIAA8AAAABAAIAAAAIAA4AAAABAAAAAAAHAA0AAAABAAAAAAAIABAAAAABAAAAAAAIABEAAAABAAAAAAAJABIAAAABAAIAAAAJABEAAAABAAMAAAAJABAAAAACAAEAAAAIABMAAAABAAAAAAAJABQAAAABAAAAAAAIABUAAAABAAAAAAAJABYAAAABAAAAAAAIABYAAAABAAAAAAAIABcAAAABAAAAAAAIABgAAAABAAAAAAAIABkAAAABAAAAAAAJABoAAAABAAAAAAAIABsAAAABAAAAAAAIABoAAAABAAAAAAAJABkAAAABAAAAAAAJABgAAAABAAAAAAAJABcAAAABAAAAAAAJABUAAAABAAAAAAAKABYAAAABAAAAAAAKABgAAAABAAAAAAAJABMAAAACAAEAAAAKABQAAAACAAEAAAAKABUAAAACAAEAAAAHABkAAAABAAAAAAAHABoAAAABAAEAAAAHABsAAAABAAEAAAAHABwAAAAAAAAAAAAGAB0AAAAAAAAAAAAHAB4AAAADAAEAAAAGAB8AAAADAAIAAAAGACAAAAABAAAAAAAGACEAAAABAAAAAAAHACAAAAABAAAAAAAGACIAAAABAAAAAAAFACEAAAABAAAAAAAFACIAAAABAAAAAAAEACEAAAABAAAAAAAEACAAAAABAAAAAAAEAB8AAAABAAAAAAAEAB4AAAABAAAAAAAEAB0AAAABAAAAAAAFABwAAAABAAAAAAAFAB0AAAABAAIAAAAGAB4AAAACAAEAAAAFAB8AAAABAAAAAAAFACAAAAABAAAAAAAGACMAAAABAAAAAAAHACIAAAABAAAAAAAHACEAAAABAAAAAAAIACAAAAABAAAAAAAHAB8AAAABAAAAAAAHAB0AAAADAAEAAAAIAB4AAAABAAAAAAAIABwAAAACAAIAAAAIAB0AAAABAAAAAAAIAB8AAAABAAAAAAAFAB4AAAABAAAAAAAKABMAAAAAAAAAAAALABIAAAAAAAAAAAAKABIAAAAAAAAAAAAKABEAAAAAAAAAAAALABEAAAAAAAAAAAAMABIAAAAAAAAAAAALABMAAAAAAAAAAAALABQAAAAAAAAAAAALABUAAAAAAAAAAAAMABQAAAAAAAAAAAAMABMAAAAAAAAAAAALABAAAAAAAAAAAAAKABAAAAAAAAAAAAAJAA8AAAAAAAAAAAAKAA4AAAAAAAAAAAAKAA0AAAAAAAAAAAALAA4AAAAAAAAAAAALAA0AAAAAAAAAAAALAA8AAAAAAAAAAAAKAA8AAAAAAAAAAAAMABAAAAAAAAAAAAANABAAAAAAAAAAAAAOABAAAAAAAAAAAAANABEAAAAAAAAAAAAOABIAAAAAAAAAAAANABMAAAAAAAAAAAAOABEAAAAAAAAAAAAOAA8AAAAAAAAAAAAOAA4AAAAAAAAAAAANAA0AAAAAAAAAAAAMAA0AAAAAAAAAAAAMAAwAAAAAAAAAAAANAAwAAAAAAAAAAAANAA4AAAAAAAAAAAANAA8AAAAAAAAAAAANABIAAAAAAAAAAAAMABEAAAAAAAAAAAAMAA8AAAAAAAAAAAAMAA4AAAAAAAAAAAAJAA0AAAAAAAAAAAAKAAwAAAAAAAAAAAAKAAsAAAAAAAAAAAALAAwAAAAAAAAAAAALABYAAAACAAEAAAAMABYAAAADAAEAAAANABQAAAADAAMAAAAMABUAAAADAAEAAAAOABQAAAADAAEAAAAPABIAAAADAAEAAAAOABMAAAADAAEAAAANABUAAAADAAIAAAAPABAAAAACAAMAAAALAAsAAAAAAAMAAAAMAAsAAAAAAAMAAAAMAAoAAAAAAAIAAAANAAsAAAABAAEAAAAOAAwAAAABAAEAAAAOAA0AAAABAAEAAAAPAA4AAAABAAEAAAAPAA8AAAACAAIAAAAPABEAAAACAAIAAAALAAoAAAABAAEAAAANAAoAAAAAAAIAAAAJAAwAAAAAAAEAAAAJAAsAAAAAAAEAAAAKAAoAAAAAAAEAAAAKAAkAAAAAAAIAAAALABcAAAADAAIAAAAKABcAAAABAAAAAAALABgAAAABAAAAAAALABkAAAABAAAAAAAMABgAAAABAAAAAAAMABkAAAABAAAAAAANABgAAAABAAAAAAANABcAAAABAAAAAAANABYAAAABAAAAAAAMABcAAAABAAAAAAAKABkAAAABAAAAAAALABoAAAABAAAAAAAMABoAAAABAAAAAAAIAAoAAAABAAAAAAAIAAsAAAABAAAAAAAIAAkAAAABAAAAAAAJAAoAAAABAAAAAAAHAAkAAAABAAAAAAAHAAgAAAABAAAAAAAIAAgAAAABAAAAAAAIAAcAAAABAAAAAAAJAAgAAAABAAAAAAAJAAkAAAABAAAAAAAKAAgAAAABAAAAAAAKAAcAAAABAAAAAAALAAgAAAABAAAAAAALAAkAAAABAAAAAAAMAAgAAAABAAAAAAAMAAkAAAABAAAAAAANAAgAAAABAAAAAAANAAcAAAABAAAAAAAOAAgAAAABAAAAAAANAAkAAAABAAAAAAAOAAoAAAABAAAAAAAOAAsAAAABAAAAAAAPAAoAAAABAAAAAAAPAAwAAAABAAAAAAAPAA0AAAABAAAAAAAQAA4AAAABAAAAAAAQAA8AAAABAAAAAAAQABAAAAABAAAAAAA=")
+tile_set = SubResource("TileSet_n0ugx")
+
+[node name="desert" type="TileMapLayer" parent="HSplitContainer/SubViewportContainer/SubViewport/tilemaps/corners"]
+unique_name_in_owner = true
+tile_map_data = PackedByteArray("AAAEABIAAAAAAAAAAAAEABMAAAAAAAAAAAAEABQAAAAAAAAAAAADABMAAAABAAMAAAAEABUAAAAAAAAAAAAFABQAAAAAAAAAAAAFABIAAAAAAAAAAAAEABEAAAAAAAAAAAADABQAAAABAAIAAAADABIAAAABAAIAAAADABUAAAACAAEAAAAEABYAAAACAAEAAAAEABcAAAADAAIAAAAFABYAAAADAAEAAAAFABUAAAADAAEAAAAFABMAAAACAAMAAAADABEAAAAAAAEAAAAEABAAAAAAAAEAAAAFABAAAAABAAEAAAAFABEAAAABAAEAAAAGABQAAAACAAIAAAAGABIAAAACAAIAAAAEAA8AAAAAAAIAAAAOAA4AAAAAAAAAAAANAA8AAAAAAAAAAAANAA4AAAAAAAAAAAANAA0AAAAAAAAAAAAMAA8AAAACAAEAAAANABAAAAACAAEAAAAOABAAAAADAAEAAAAOAA8AAAADAAEAAAAOAAwAAAABAAEAAAAOAA0AAAABAAEAAAAMAA0AAAAAAAEAAAANAAwAAAAAAAEAAAANAAsAAAAAAAIAAAAPAA4AAAACAAIAAAANABEAAAADAAIAAAAMAA4AAAABAAIAAAARABUAAAAAAAAAAAARABYAAAAAAAAAAAARABcAAAAAAAAAAAARABgAAAAAAAAAAAARABkAAAAAAAAAAAASABUAAAAAAAAAAAASABYAAAAAAAAAAAASABcAAAAAAAAAAAASABgAAAAAAAAAAAASABkAAAAAAAAAAAATABUAAAAAAAAAAAATABYAAAAAAAAAAAATABcAAAAAAAAAAAATABgAAAAAAAAAAAATABkAAAAAAAAAAAAUABUAAAAAAAAAAAAUABYAAAAAAAAAAAAUABcAAAAAAAAAAAAUABgAAAAAAAAAAAAUABkAAAAAAAAAAAAVABUAAAAAAAAAAAAVABYAAAAAAAAAAAAVABcAAAAAAAAAAAAVABgAAAAAAAAAAAAVABkAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_r4i44")
+
+[node name="grass" type="TileMapLayer" parent="HSplitContainer/SubViewportContainer/SubViewport/tilemaps/corners"]
+unique_name_in_owner = true
+tile_map_data = PackedByteArray("AAAEAA8AAAAAAAAAAAAFAA4AAAAAAAAAAAAFAA8AAAAAAAAAAAAFABAAAAAAAAAAAAAEAA0AAAAAAAAAAAAFAA0AAAAAAAAAAAAGAB0AAAAAAAAAAAAHABwAAAAAAAAAAAAHAB4AAAADAAEAAAAHAB0AAAADAAEAAAAGAB4AAAACAAEAAAAGABwAAAAAAAEAAAAGABsAAAAAAAEAAAAHABsAAAABAAEAAAAIABwAAAACAAIAAAAGAB8AAAADAAIAAAAFAB0AAAABAAIAAAAHABoAAAAAAAIAAAAGAA4AAAACAAMAAAAEAA4AAAABAAMAAAAFAAwAAAAAAAMAAAAEAAwAAAAAAAEAAAAFABEAAAADAAEAAAAGABAAAAADAAEAAAAEABAAAAACAAEAAAAEABEAAAACAAEAAAAGAAwAAAABAAEAAAAGAA0AAAACAAIAAAAGAA8AAAACAAIAAAAFAAsAAAAAAAIAAAAEAAsAAAAAAAIAAAAFABIAAAADAAIAAAADAA8AAAABAAIAAAADAA0AAAABAAIAAAAJAA8AAAAAAAAAAAAJAA0AAAAAAAAAAAAKAA4AAAAAAAAAAAAKAA8AAAAAAAAAAAAKABAAAAAAAAAAAAAKABEAAAAAAAAAAAAKABIAAAAAAAAAAAALABIAAAAAAAAAAAAKABMAAAAAAAAAAAALABEAAAAAAAAAAAALABAAAAAAAAAAAAALAA8AAAAAAAAAAAALAA4AAAAAAAAAAAAMABAAAAAAAAAAAAAKAA0AAAAAAAAAAAAMABIAAAAAAAAAAAALABMAAAAAAAAAAAALABQAAAAAAAAAAAALABUAAAADAAEAAAAMABQAAAADAAEAAAAMABMAAAADAAEAAAAMABEAAAACAAMAAAAKAAwAAAAAAAMAAAAJAA4AAAABAAMAAAAJABEAAAABAAMAAAAJABMAAAACAAEAAAAKABQAAAACAAEAAAAKABUAAAACAAEAAAALAAwAAAABAAEAAAALAA0AAAABAAEAAAAMAA4AAAABAAEAAAAMAA8AAAABAAEAAAANABAAAAACAAIAAAANABIAAAACAAIAAAAJABIAAAABAAIAAAAIAA8AAAABAAIAAAAIAA0AAAABAAIAAAAJAAwAAAAAAAEAAAAJAAsAAAAAAAIAAAAKAAsAAAAAAAIAAAAJABAAAAACAAEAAAA=")
+tile_set = SubResource("TileSet_oa3ij")
+
+[node name="features" type="TileMapLayer" parent="HSplitContainer/SubViewportContainer/SubViewport/tilemaps"]
+unique_name_in_owner = true
+y_sort_enabled = true
+position = Vector2(16, 0)
+tile_map_data = PackedByteArray("AAAEAAwAAAAAAAAAAAAFAA4AAAAAAAAAAAAGABMAAAAAAAEAAAAGABsAAAAAAAEAAAAGABIAAAAAAAIAAAAGAB4AAAAAAAIAAAAHABIAAAAAAAIAAAAGABEAAAAAAAIAAAAMAA0AAAAAAAIAAAANAAwAAAAAAAIAAAAMABMAAAAAAAIAAAAMAAwAAAAAAAEAAAALAA0AAAAAAAEAAAAMAA4AAAAAAAEAAAANAA4AAAAAAAEAAAAIAA0AAAAAAAEAAAAJAAwAAAAAAAEAAAAKAAwAAAAAAAEAAAAJABEAAAAAAAAAAAALABAAAAAAAAAAAAAKABIAAAABAAAAAAAKAA8AAAABAAAAAAAIAA8AAAABAAAAAAAKABAAAAACAAAAAAA=")
+tile_set = SubResource("TileSet_lwf3l")
+
+[node name="PanelContainer" type="PanelContainer" parent="HSplitContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HSplitContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Control Area"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HSplitContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MenuButton_file" type="MenuButton" parent="HSplitContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "File"
+item_count = 4
+popup/item_0/text = "Save Continent"
+popup/item_0/id = 0
+popup/item_1/text = "Load Continent"
+popup/item_1/id = 1
+popup/item_2/text = "Save Continent Generator"
+popup/item_2/id = 2
+popup/item_3/text = "Load Continent Generator"
+popup/item_3/id = 3
+
+[node name="MenuBar" type="MenuBar" parent="HSplitContainer/PanelContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="File" type="PopupMenu" parent="HSplitContainer/PanelContainer/VBoxContainer/MenuBar"]
+item_count = 4
+item_0/text = "Save Continent"
+item_0/id = 0
+item_1/text = "Load Continent"
+item_1/id = 1
+item_2/text = "Save Continent Generator"
+item_2/id = 2
+item_3/text = "Load Continent Generator"
+item_3/id = 3
+
+[node name="TabContainer" type="TabContainer" parent="HSplitContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+current_tab = 1
+
+[node name="Generate" type="VBoxContainer" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="GridContainer" type="GridContainer" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate"]
+layout_mode = 2
+columns = 2
+
+[node name="Label2" type="Label" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer"]
+layout_mode = 2
+text = "Width"
+
+[node name="spin_width" type="SpinBox" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer"]
+layout_mode = 2
+text = "Height"
+
+[node name="spin_height" type="SpinBox" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer"]
+layout_mode = 2
+text = "Scale X"
+
+[node name="spin_scale_x" type="SpinBox" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+step = 0.1
+value = 1.0
+allow_greater = true
+allow_lesser = true
+
+[node name="Label5" type="Label" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer"]
+layout_mode = 2
+text = "Scale Y"
+
+[node name="spin_scale_y" type="SpinBox" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+step = 0.1
+value = 1.0
+allow_greater = true
+allow_lesser = true
+
+[node name="Label6" type="Label" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer"]
+layout_mode = 2
+text = "Warmth"
+
+[node name="spin_warmth" type="SpinBox" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+step = 0.1
+value = 1.0
+allow_greater = true
+allow_lesser = true
+
+[node name="Label7" type="Label" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer"]
+layout_mode = 2
+text = "Wetness"
+
+[node name="spin_wetness" type="SpinBox" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+step = 0.1
+value = 1.0
+allow_greater = true
+allow_lesser = true
+
+[node name="Label8" type="Label" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer"]
+layout_mode = 2
+text = "Land Fraction"
+
+[node name="spin_land_fraction" type="SpinBox" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+
+[node name="Label9" type="Label" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer"]
+layout_mode = 2
+text = "Mountain Height"
+
+[node name="spin_mountain_height" type="SpinBox" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+
+[node name="Label10" type="Label" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer"]
+layout_mode = 2
+text = "Hill Height"
+
+[node name="spin_hill_height" type="SpinBox" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+
+[node name="Label" type="Label" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer"]
+layout_mode = 2
+text = "Seed"
+
+[node name="spin_seed" type="SpinBox" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="bn_generate" type="Button" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate"]
+layout_mode = 2
+text = "Generate
+"
+
+[node name="Paint" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer" instance=ExtResource("8_kdi3l")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="WorldAssembler" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer" instance=ExtResource("9_qkl76")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="FileDialog_continent_save" type="FileDialog" parent="."]
+unique_name_in_owner = true
+filters = PackedStringArray("*.tres")
+
+[node name="FileDialog_generator_save" type="FileDialog" parent="."]
+unique_name_in_owner = true
+auto_translate_mode = 1
+filters = PackedStringArray("*.tres")
+
+[node name="FileDialog_continent_load" type="FileDialog" parent="."]
+unique_name_in_owner = true
+title = "Open a File"
+ok_button_text = "Open"
+file_mode = 0
+filters = PackedStringArray("*.tres")
+
+[node name="FileDialog_generator_load" type="FileDialog" parent="."]
+unique_name_in_owner = true
+auto_translate_mode = 1
+title = "Open a File"
+ok_button_text = "Open"
+file_mode = 0
+filters = PackedStringArray("*.tres")
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+
+[connection signal="gui_input" from="HSplitContainer/SubViewportContainer" to="." method="_on_sub_viewport_container_gui_input"]
+[connection signal="id_pressed" from="HSplitContainer/PanelContainer/VBoxContainer/MenuBar/File" to="." method="_on_file_id_pressed"]
+[connection signal="value_changed" from="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer/spin_width" to="." method="_on_spin_width_value_changed"]
+[connection signal="value_changed" from="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer/spin_height" to="." method="_on_spin_height_value_changed"]
+[connection signal="value_changed" from="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer/spin_scale_x" to="." method="_on_spin_scale_x_value_changed"]
+[connection signal="value_changed" from="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer/spin_scale_y" to="." method="_on_spin_scale_y_value_changed"]
+[connection signal="value_changed" from="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer/spin_warmth" to="." method="_on_spin_warmth_value_changed"]
+[connection signal="value_changed" from="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer/spin_wetness" to="." method="_on_spin_wetness_value_changed"]
+[connection signal="value_changed" from="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer/spin_land_fraction" to="." method="_on_spin_land_fraction_value_changed"]
+[connection signal="value_changed" from="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer/spin_mountain_height" to="." method="_on_spin_mountain_height_value_changed"]
+[connection signal="value_changed" from="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer/spin_hill_height" to="." method="_on_spin_hill_height_value_changed"]
+[connection signal="value_changed" from="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/GridContainer/spin_seed" to="." method="_on_spin_seed_value_changed"]
+[connection signal="pressed" from="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Generate/bn_generate" to="." method="_on_bn_generate_pressed"]
+[connection signal="edit_mode_changed" from="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/Paint" to="." method="_on_paint_edit_mode_changed"]
+[connection signal="generate_world" from="HSplitContainer/PanelContainer/VBoxContainer/TabContainer/WorldAssembler" to="." method="_on_world_assembler_generate_world"]
+[connection signal="file_selected" from="FileDialog_continent_save" to="." method="_on_file_dialog_save_file_selected"]
+[connection signal="file_selected" from="FileDialog_generator_save" to="." method="_on_file_dialog_generator_save_file_selected"]
+[connection signal="file_selected" from="FileDialog_continent_load" to="." method="_on_file_dialog_load_file_selected"]
+[connection signal="file_selected" from="FileDialog_generator_load" to="." method="_on_file_dialog_generator_load_2_file_selected"]

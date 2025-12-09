@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="ContinentBuilder" load_steps=7 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/texture/bioime_table.png" id="1_ksya3"]
+[ext_resource type="Script" path="res://scripts/continent_builder.gd" id="2_je6oo"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jbqbs"]
+seed = 1327520283
+frequency = 0.042
+offset = Vector3(0, 51.72, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_u57ht"]
+seed = -2141309218
+frequency = 0.1055
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qvodu"]
+noise_type = 0
+seed = 881477183
+frequency = 0.0552
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yrlek"]
+seed = 692503688
+frequency = 0.1055
+
+[resource]
+script = ExtResource("2_je6oo")
+noise = SubResource("FastNoiseLite_qvodu")
+low_freq_noise = SubResource("FastNoiseLite_jbqbs")
+temperature_noise = SubResource("FastNoiseLite_yrlek")
+moisture_noise = SubResource("FastNoiseLite_u57ht")
+width = 10
+height = 20
+scale = Vector2(1, 1)
+terrain_height_scalar = 1.0
+warmth = 0.1
+wetness = 0.0
+land_fraction = 0.3
+distortion_amount = 1.0
+mountain_height = 0.6
+hill_height = 0.3
+rand_seed = 0
+biome_table = ExtResource("1_ksya3")
+num_plates = 10
+plate_pressure_radius = 3
+use_circle_mask = true
+circle_mask_radius_inner = 0.6
+circle_mask_radius_outer = 1.0
+circle_mask_value_min = -1.0
+circle_mask_value_max = 0.0

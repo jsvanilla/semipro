@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dmv1hirlq2whp"]
+
+[ext_resource type="Shader" uid="uid://diok3hrf3k1j" path="res://shaders/tile_map_shader.tres" id="1_f1njh"]
+[ext_resource type="Texture2D" uid="uid://cb62vfehvkcam" path="res://assets/texture/tileset/world_tiles_mix.png" id="2_w4je3"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_f1njh")
+shader_parameter/tile_map_width = 32
+shader_parameter/tile_map_height = 32
+shader_parameter/index_map_width = 4
+shader_parameter/index_map_height = 4
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/tile_source_albedo = ExtResource("2_w4je3")

@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://cedbe8h5kjp1d"]
+
+[ext_resource type="PackedScene" uid="uid://v2a1k3bj3ej6" path="res://scenes/tile_map_2d.tscn" id="1_gni0h"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 800
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HSplitContainer"]
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="HSplitContainer/SubViewportContainer"]
+size = Vector2i(800, 648)
+
+[node name="Node2D" parent="HSplitContainer/SubViewportContainer/SubViewport" instance=ExtResource("1_gni0h")]
+
+[node name="PanelContainer" type="PanelContainer" parent="HSplitContainer"]
+layout_mode = 2
