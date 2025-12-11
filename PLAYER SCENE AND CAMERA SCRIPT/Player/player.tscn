@@ -1,0 +1,106 @@
+[gd_scene load_steps=8 format=3 uid="uid://c7wyor27lph"]
+
+[ext_resource type="Script" uid="uid://c20ths71inm43" path="res://PLAYER SCENE AND CAMERA SCRIPT/Player/Player.gd" id="1_ttuue"]
+[ext_resource type="Texture2D" uid="uid://bt0mua0uglfqm" path="res://PLAYER SCENE AND CAMERA SCRIPT/Leonard/KidLeonard_Reposo_Adelante.png" id="2_0ami7"]
+[ext_resource type="Texture2D" uid="uid://rjv01vhepvui" path="res://PLAYER SCENE AND CAMERA SCRIPT/Leonard/KidLeonard_Reposo_Atras.png" id="3_reunx"]
+[ext_resource type="Texture2D" uid="uid://dpawd6jntp1jc" path="res://PLAYER SCENE AND CAMERA SCRIPT/Leonard/KidLeonard_Reposo_Derecha.png" id="4_uogmx"]
+[ext_resource type="Texture2D" uid="uid://dodewqqpi3nsh" path="res://PLAYER SCENE AND CAMERA SCRIPT/Leonard/KidLeonard_Reposo_Izquierda.png" id="5_2ykam"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_21no6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0ami7")
+}],
+"loop": true,
+"name": &"corriendo_adelante",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_reunx")
+}],
+"loop": true,
+"name": &"corriendo_atras",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_uogmx")
+}],
+"loop": true,
+"name": &"corriendo_derecha",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_2ykam")
+}],
+"loop": true,
+"name": &"corriendo_izquierda",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0ami7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0ami7")
+}],
+"loop": true,
+"name": &"reposo_adelante",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_reunx")
+}],
+"loop": true,
+"name": &"reposo_atras",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_uogmx")
+}],
+"loop": true,
+"name": &"reposo_derecha",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_2ykam")
+}],
+"loop": true,
+"name": &"reposo_izquierda",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vvnbb"]
+radius = 1.071
+height = 6.714
+
+[node name="Leonard" type="CharacterBody3D" groups=["InMapCharacter"]]
+collision_layer = 256
+collision_mask = 513
+script = ExtResource("1_ttuue")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.115, 0, 0, 0, 0.115, 0, 0, 0, 0.115, 0, 1.75574, 0)
+billboard = 1
+sprite_frames = SubResource("SpriteFrames_21no6")
+animation = &"corriendo_adelante"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.75574, 0)
+shape = SubResource("CapsuleShape3D_vvnbb")
+
+[node name="CollisionBillboard" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, -2.75664e-16, 1.41976e-16, 1.41976e-16, 0.407058, 0.290351, -2.75664e-16, -0.290351, 0.407058, 0, 1.75574, 0)
+visible = false
+shape = SubResource("CapsuleShape3D_vvnbb")
