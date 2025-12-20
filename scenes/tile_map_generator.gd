@@ -1,16 +1,16 @@
 extends Control
 class_name TileMapGenerator
 
-@export var continent_builder:ContinentBuilder = ContinentBuilder.new()
-var map:WorldMap
-
-@export var world_assembler:WorldAssemblerManifest = WorldAssemblerManifest.new()
-
 enum EditTool { MOVE, PAINT }
-@export var edit_tool:EditTool
 
+@onready var world_tilemap:WorldTilemap2D = %world_tilemap
+
+@export var continent_builder:ContinentBuilder = ContinentBuilder.new()
+@export var world_assembler:WorldAssemblerManifest = WorldAssemblerManifest.new()
+@export var edit_tool:EditTool
 @export var paintbrush_info:PaintBrushInfo
 
+var map:WorldMap
 
 var start_drag_pos:Vector2
 var mouse_down_pos:Vector2
@@ -46,31 +46,31 @@ func update_from_continent_builder():
 	_on_bn_generate_pressed()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func _on_bn_generate_pressed() -> void:
 	map = continent_builder.build_world_map()
 	#map.print_terrain_types()
 	build_layout_from_map(map)
 
 func build_layout_from_map(map:WorldMap):
-	var isoBuilder:IsoTileLayoutBuilder = IsoTileLayoutBuilder.new()
-	isoBuilder.map = map
-	isoBuilder.continent_layer = %continent
-	isoBuilder.desert_layer = %desert
-	isoBuilder.grass_layer = %grass
-	isoBuilder.feature_layer = %features
-	
-	isoBuilder.rng = RandomNumberGenerator.new()
-	isoBuilder.rng.seed = %spin_seed.value
-	#isoBuilder.dump_tileset()
-	isoBuilder.build()
-	
-	
-	pass # Replace with function body.
+	world_tilemap.map = map
+	world_tilemap.map_seed = %spin_seed.value
+	world_tilemap.rebuild_map()
+
+#func build_layout_from_map(map:WorldMap):
+	#var isoBuilder:IsoTileLayoutBuilder = IsoTileLayoutBuilder.new()
+	#isoBuilder.map = map
+	#isoBuilder.continent_layer = %continent
+	#isoBuilder.desert_layer = %desert
+	#isoBuilder.grass_layer = %grass
+	#isoBuilder.feature_layer = %features
+	#
+	#isoBuilder.rng = RandomNumberGenerator.new()
+	#isoBuilder.rng.seed = %spin_seed.value
+	##isoBuilder.dump_tileset()
+	#isoBuilder.build()
+	#
+	#
+	#pass # Replace with function body.
 
 
 func _on_spin_seed_value_changed(value: float) -> void:
@@ -103,8 +103,8 @@ func _on_sub_viewport_container_gui_input(event: InputEvent) -> void:
 	elif edit_tool == EditTool.PAINT:
 		tool_paint(event)
 		return
-		pass
-	
+
+
 func tool_paint(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		var e:InputEventMouseButton = event
@@ -112,16 +112,16 @@ func tool_paint(event: InputEvent) -> void:
 		
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if e.is_pressed():
-				start_drag_pos = %tilemaps.global_position
+				start_drag_pos = world_tilemap.global_position
 				mouse_down_pos = e.position
 				dragging = true
 				
 				#event.position
-				var xform:Transform2D = %continent.global_transform
+				var xform:Transform2D = world_tilemap.layer_continent.global_transform
 				var local_pos = xform.affine_inverse() * event.global_position
 				
 #				var grid_coord:Vector2i = %continent.local_to_map(event.position)
-				var grid_coord:Vector2i = %continent.local_to_map(local_pos)
+				var grid_coord:Vector2i = world_tilemap.layer_continent.local_to_map(local_pos)
 				dab_brush(grid_coord)
 			
 			else:
@@ -130,11 +130,11 @@ func tool_paint(event: InputEvent) -> void:
 		
 	elif event is InputEventMouseMotion:
 		if dragging:
-			var xform:Transform2D = %continent.global_transform
+			var xform:Transform2D = world_tilemap.layer_continent.global_transform
 			var local_pos = xform.affine_inverse() * event.global_position
 			
 #				var grid_coord:Vector2i = %continent.local_to_map(event.position)
-			var grid_coord:Vector2i = %continent.local_to_map(local_pos)
+			var grid_coord:Vector2i = world_tilemap.layer_continent.local_to_map(local_pos)
 			dab_brush(grid_coord)
 
 		
@@ -144,7 +144,7 @@ func tool_move(event: InputEvent) -> void:
 		
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if e.is_pressed():
-				start_drag_pos = %tilemaps.global_position
+				start_drag_pos = world_tilemap.global_position
 				mouse_down_pos = e.position
 				dragging = true
 			
@@ -153,29 +153,29 @@ func tool_move(event: InputEvent) -> void:
 
 		if e.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			var view_size:Vector2 = %SubViewportContainer.size
-			var xform:Transform2D = %tilemaps.transform
+			var xform:Transform2D = world_tilemap.transform
 			var pos:Vector2 = e.position
 			
 			xform = xform.translated(-pos)
 			xform = xform.scaled(Vector2.ONE / zoom_base)
 			xform = xform.translated(pos)
 			
-			%tilemaps.transform = xform
+			world_tilemap.transform = xform
 			
 		if e.button_index == MOUSE_BUTTON_WHEEL_UP:
 			var view_size:Vector2 = %SubViewportContainer.size
-			var xform:Transform2D = %tilemaps.transform
+			var xform:Transform2D = world_tilemap.transform
 			var pos:Vector2 = e.position
 			
 			xform = xform.translated(-pos)
 			xform = xform.scaled(Vector2.ONE * zoom_base)
 			xform = xform.translated(pos)
 			
-			%tilemaps.transform = xform
+			world_tilemap.transform = xform
 			
 	elif event is InputEventMouseMotion:
 		if dragging:
-			%tilemaps.global_position = (event.position - mouse_down_pos) + start_drag_pos
+			world_tilemap.global_position = (event.position - mouse_down_pos) + start_drag_pos
 
 
 func _on_spin_scale_x_value_changed(value: float) -> void:

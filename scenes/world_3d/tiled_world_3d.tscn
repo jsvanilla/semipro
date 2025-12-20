@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhy8ouft8ta1x"]
+
+[ext_resource type="Script" uid="uid://cxylg6m28von0" path="res://scenes/world_3d/tiled_world_3d.gd" id="1_t3tlk"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_t3tlk"]
+
+[node name="TiledWorld3d" type="Node3D"]
+script = ExtResource("1_t3tlk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_t3tlk")
+
+[node name="SubViewport" type="SubViewport" parent="."]
