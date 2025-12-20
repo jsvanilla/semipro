@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=3 uid="uid://iqlqp6ur1k8w"]
 
-[ext_resource type="Script" uid="uid://3fbs1buv0idb" path="res://scenes/tile_map_generator.gd" id="1_1eqje"]
-[ext_resource type="Texture2D" uid="uid://8okg86avaqq7" path="res://assets/texture/bioime_table.png" id="2_243sj"]
-[ext_resource type="Script" uid="uid://dexg8nvs46rav" path="res://scripts/continent_builder.gd" id="2_wugi1"]
-[ext_resource type="PackedScene" uid="uid://bgi58isy7n8i5" path="res://scenes/world_tilemap_2d.tscn" id="4_2qe3y"]
-[ext_resource type="PackedScene" uid="uid://c5v6x2ndnyahd" path="res://scenes/paint_panel.tscn" id="8_kdi3l"]
-[ext_resource type="PackedScene" uid="uid://mlc6yr38r4vq" path="res://scenes/world_assembler_panel.tscn" id="9_qkl76"]
+[ext_resource type="Script" uid="uid://3fbs1buv0idb" path="res://scenes/tile_map_generator_main.gd" id="1_2jn0e"]
+[ext_resource type="Texture2D" uid="uid://8okg86avaqq7" path="res://assets/texture/bioime_table.png" id="2_snnb2"]
+[ext_resource type="Script" uid="uid://dexg8nvs46rav" path="res://scripts/continent_builder.gd" id="3_mgj83"]
+[ext_resource type="PackedScene" uid="uid://bgi58isy7n8i5" path="res://scenes/world_tilemap_2d.tscn" id="4_c27gv"]
+[ext_resource type="PackedScene" uid="uid://c5v6x2ndnyahd" path="res://scenes/paint_panel.tscn" id="5_bc0k3"]
+[ext_resource type="PackedScene" uid="uid://mlc6yr38r4vq" path="res://scenes/world_assembler_panel.tscn" id="6_1ke8d"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_jbqbs"]
 frequency = 0.042
@@ -22,12 +22,12 @@ frequency = 0.0552
 frequency = 0.1055
 
 [sub_resource type="Resource" id="Resource_jpq1i"]
-script = ExtResource("2_wugi1")
+script = ExtResource("3_mgj83")
 noise = SubResource("FastNoiseLite_qvodu")
 low_freq_noise = SubResource("FastNoiseLite_jbqbs")
 temperature_noise = SubResource("FastNoiseLite_yrlek")
 moisture_noise = SubResource("FastNoiseLite_u57ht")
-biome_table = ExtResource("2_243sj")
+biome_table = ExtResource("2_snnb2")
 
 [node name="TileMapGenerator" type="Control"]
 layout_mode = 3
@@ -36,7 +36,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_1eqje")
+script = ExtResource("1_2jn0e")
 continent_builder = SubResource("Resource_jpq1i")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
@@ -58,7 +58,7 @@ handle_input_locally = false
 size = Vector2i(600, 648)
 render_target_update_mode = 4
 
-[node name="world_tilemap" parent="HSplitContainer/SubViewportContainer/SubViewport" instance=ExtResource("4_2qe3y")]
+[node name="world_tilemap" parent="HSplitContainer/SubViewportContainer/SubViewport" instance=ExtResource("4_c27gv")]
 unique_name_in_owner = true
 
 [node name="PanelContainer" type="PanelContainer" parent="HSplitContainer"]
@@ -224,11 +224,11 @@ layout_mode = 2
 text = "Generate
 "
 
-[node name="Paint" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer" instance=ExtResource("8_kdi3l")]
+[node name="Paint" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer" instance=ExtResource("5_bc0k3")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="WorldAssembler" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer" instance=ExtResource("9_qkl76")]
+[node name="WorldAssembler" parent="HSplitContainer/PanelContainer/VBoxContainer/TabContainer" instance=ExtResource("6_1ke8d")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
