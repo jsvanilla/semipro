@@ -1,11 +1,31 @@
+@tool
 extends Node3D
 class_name TiledWorld3D
 
 @onready var world_tilemap:WorldTilemap2D = %tilemaps
 
-@export var map:WorldMap
-@export var map_seed:int
+@export var map:WorldMap:
+	set(v):
+		if map == v:
+			return
+		map = v
+		
+		if world_tilemap:
+			world_tilemap.map = map
 
+@export var map_seed:int:
+	set(v):
+		if map_seed == v:
+			return
+		map_seed = v
+		
+		if world_tilemap:
+			world_tilemap.map_seed = map_seed
+	
+
+func _ready() -> void:
+	world_tilemap.map = map
+	world_tilemap.map_seed = map_seed
 
 func build_layout_from_map(map:WorldMap):
 	world_tilemap.map = map

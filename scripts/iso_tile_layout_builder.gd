@@ -20,6 +20,9 @@ func is_blocked(coord:Vector2i,
 func write_terrain_layer(layer:TileMapLayer, terrain_type:WorldMapCell.Terrain):
 	layer.clear()
 	
+	if !map:
+		return
+		
 	for j in range(-1, map.grid.height + 1):
 		for i in map.grid.width + 1:
 			var coord:Vector2i = Vector2i(i, j)
@@ -121,6 +124,10 @@ func build():
 	write_terrain_layer(grass_layer, WorldMapCell.Terrain.GRASSLAND)
 
 	feature_layer.clear()
+	
+	if !map:
+		return
+		
 	for j in range(-1, map.grid.height + 1):
 		for i in map.grid.width + 1:
 			var coord:Vector2i = Vector2i(i, j)
