@@ -21,3 +21,6 @@ enum Vegetation { NONE, FOREST }
 
 func copy_cell(peer:WorldMapCell):
 	terrain = peer.terrain
+
+#func _to_string() -> String:
+	#return "feature: " + str(feature)

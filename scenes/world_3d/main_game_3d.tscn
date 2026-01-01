@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://gohaaefalyw1" path="res://scenes/world_3d/main_game_3d.gd" id="1_7sv0b"]
 [ext_resource type="PackedScene" uid="uid://bhy8ouft8ta1x" path="res://scenes/world_3d/tiled_world_3d.tscn" id="2_lqdvj"]
-[ext_resource type="Resource" uid="uid://bbhsoharb13me" path="res://generated_maps/my_test_map.tres" id="3_lqdvj"]
+[ext_resource type="Resource" uid="uid://cyoxs21h1fpd6" path="res://generated_maps/map_seed_3.tres" id="3_ktfsu"]
 [ext_resource type="PackedScene" uid="uid://g7cbjgpr0nmp" path="res://scenes/world_3d/props/hill.tscn" id="4_ktfsu"]
 [ext_resource type="PackedScene" uid="uid://c3qbghfq8eajk" path="res://scenes/world_3d/props/mountain.tscn" id="5_xxk2a"]
 [ext_resource type="PackedScene" uid="uid://b72l5krmb84yo" path="res://scenes/world_3d/props/trees.tscn" id="6_hjcx6"]
@@ -20,7 +20,7 @@ sky = SubResource("Sky_bcm62")
 script = ExtResource("1_7sv0b")
 
 [node name="TiledWorld3d" parent="." instance=ExtResource("2_lqdvj")]
-map = ExtResource("3_lqdvj")
+map = ExtResource("3_ktfsu")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.8189418, 0.5738766, 0, -0.5738766, 0.8189418, 0, 0.83768654, 1.467741)
