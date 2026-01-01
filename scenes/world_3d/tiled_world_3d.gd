@@ -3,6 +3,7 @@ extends Node3D
 class_name TiledWorld3D
 
 @onready var world_tilemap:WorldTilemap2D = %tilemaps
+@onready var subviewport:SubViewport = %SubViewport
 
 @export var map:WorldMap:
 	set(v):
@@ -12,6 +13,8 @@ class_name TiledWorld3D
 		
 		if world_tilemap:
 			world_tilemap.map = map
+			
+		update_from_map()
 
 @export var map_seed:int:
 	set(v):
@@ -21,7 +24,27 @@ class_name TiledWorld3D
 		
 		if world_tilemap:
 			world_tilemap.map_seed = map_seed
+
+@export var tile_size:Vector2i = Vector2i(32, 32):
+	set(v):
+		if tile_size == v:
+			return
+			
+		tile_size = v
+		update_from_map()
+
+func update_from_map():
+	if !is_node_ready():
+		return
+		
+	if !map:
+		return
 	
+	#Height divided by 2 since rows are staggered
+	subviewport.size = Vector2i(map.get_width() * tile_size.x, map.get_height() * tile_size.y / 2)
+	
+	
+	pass
 
 func _ready() -> void:
 	world_tilemap.map = map

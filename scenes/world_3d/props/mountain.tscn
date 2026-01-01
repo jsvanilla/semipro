@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3qbghfq8eajk"]
+
+[ext_resource type="PackedScene" uid="uid://cs3n6rlioou7i" path="res://assets/props/world/mountain.gltf" id="1_q01ga"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q01ga"]
+height = 1.1555176
+
+[node name="mountain" type="StaticBody3D"]
+collision_mask = 0
+
+[node name="mountain" parent="." instance=ExtResource("1_q01ga")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24304199, 0)
+shape = SubResource("CapsuleShape3D_q01ga")

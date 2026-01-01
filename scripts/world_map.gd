@@ -35,10 +35,6 @@ func get_terrain_at_pos(pos:Vector2i, default:WorldMapCell.Terrain)->WorldMapCel
 	if !cell:
 		return default
 	return cell.terrain
-	
-#var ocean_land_lookup:Dictionary = {
-	#0b1: 0
-	#}
 
 func get_terrain_id(tile_set:TileSet, name:String)->int:
 	for i in tile_set.get_terrain_sets_count():

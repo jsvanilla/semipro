@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b72l5krmb84yo"]
+
+[ext_resource type="PackedScene" uid="uid://b06gb2l1d456" path="res://assets/props/world/trees.gltf" id="1_h7lo2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h7lo2"]
+
+[node name="trees" type="StaticBody3D"]
+collision_layer = 128
+collision_mask = 0
+
+[node name="trees" parent="." instance=ExtResource("1_h7lo2")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_h7lo2")

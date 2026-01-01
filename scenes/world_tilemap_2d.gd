@@ -21,7 +21,6 @@ var mouse_down_pos:Vector2
 var dragging:bool = false
 var zoom_base:float = 1.2
 
-
 func rebuild_map():
 	if !is_node_ready():
 		return

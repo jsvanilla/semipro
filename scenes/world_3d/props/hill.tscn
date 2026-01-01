@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://g7cbjgpr0nmp"]
+
+[ext_resource type="PackedScene" uid="uid://cdauic3ye7ngl" path="res://assets/props/world/hill.gltf" id="1_8kg6p"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8kg6p"]
+radius = 0.4127802
+
+[node name="hill" type="StaticBody3D"]
+collision_layer = 128
+collision_mask = 0
+
+[node name="hill" parent="." instance=ExtResource("1_8kg6p")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_8kg6p")

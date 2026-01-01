@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dxmyg5wclieqg"]
+[gd_scene load_steps=10 format=3 uid="uid://dxmyg5wclieqg"]
 
 [ext_resource type="Script" uid="uid://gohaaefalyw1" path="res://scenes/world_3d/main_game_3d.gd" id="1_7sv0b"]
 [ext_resource type="PackedScene" uid="uid://bhy8ouft8ta1x" path="res://scenes/world_3d/tiled_world_3d.tscn" id="2_lqdvj"]
 [ext_resource type="Resource" uid="uid://bbhsoharb13me" path="res://generated_maps/my_test_map.tres" id="3_lqdvj"]
+[ext_resource type="PackedScene" uid="uid://g7cbjgpr0nmp" path="res://scenes/world_3d/props/hill.tscn" id="4_ktfsu"]
+[ext_resource type="PackedScene" uid="uid://c3qbghfq8eajk" path="res://scenes/world_3d/props/mountain.tscn" id="5_xxk2a"]
+[ext_resource type="PackedScene" uid="uid://b72l5krmb84yo" path="res://scenes/world_3d/props/trees.tscn" id="6_hjcx6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lqdvj"]
 
@@ -18,6 +21,7 @@ script = ExtResource("1_7sv0b")
 
 [node name="TiledWorld3d" parent="." instance=ExtResource("2_lqdvj")]
 map = ExtResource("3_lqdvj")
+tile_size = Vector2i(32, 32)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.8189418, 0.5738766, 0, -0.5738766, 0.8189418, 0, 0.83768654, 1.467741)
@@ -27,3 +31,11 @@ transform = Transform3D(1, 0, 0, 0, 0.2267533, 0.97395223, 0, -0.97395223, 0.226
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_si8o7")
+
+[node name="hill" parent="." instance=ExtResource("4_ktfsu")]
+
+[node name="mountain" parent="." instance=ExtResource("5_xxk2a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.57283556, 0, -0.2875967)
+
+[node name="trees" parent="." instance=ExtResource("6_hjcx6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49114764, 0, 0.4468994)

@@ -16,12 +16,14 @@ albedo_texture = SubResource("ViewportTexture_4vhe1")
 
 [node name="TiledWorld3d" type="Node3D"]
 script = ExtResource("1_t3tlk")
+tile_size = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_t3tlk")
 surface_material_override/0 = SubResource("StandardMaterial3D_4vhe1")
 
 [node name="SubViewport" type="SubViewport" parent="."]
+unique_name_in_owner = true
 own_world_3d = true
 world_3d = SubResource("World3D_80vba")
 

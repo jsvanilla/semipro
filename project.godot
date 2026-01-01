@@ -19,6 +19,10 @@ config/icon="res://icon.png"
 
 Globals="*res://scenes/globals.tscn"
 
+[filesystem]
+
+import/blender/enabled=false
+
 [rendering]
 
 renderer/rendering_method="mobile"
