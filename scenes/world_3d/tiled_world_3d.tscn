@@ -11,14 +11,18 @@ viewport_path = NodePath("SubViewport")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4vhe1"]
 resource_local_to_scene = true
 albedo_texture = SubResource("ViewportTexture_4vhe1")
+texture_filter = 0
 
 [sub_resource type="World3D" id="World3D_80vba"]
 
 [node name="TiledWorld3d" type="Node3D"]
 script = ExtResource("1_t3tlk")
-tile_size = null
+
+[node name="features" type="Node3D" parent="."]
+unique_name_in_owner = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
 mesh = SubResource("PlaneMesh_t3tlk")
 surface_material_override/0 = SubResource("StandardMaterial3D_4vhe1")
 
