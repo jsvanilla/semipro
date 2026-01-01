@@ -38,6 +38,7 @@ class_name TiledWorld3D
 @export var mountain_scene:PackedScene = preload("res://scenes/world_3d/props/mountain.tscn")
 @export var hill_scene:PackedScene = preload("res://scenes/world_3d/props/hill.tscn")
 @export var trees_scene:PackedScene = preload("res://scenes/world_3d/props/trees.tscn")
+@export var ocean_scene:PackedScene = preload("res://scenes/world_3d/props/ocean.tscn")
 
 
 func update_from_map():
@@ -62,21 +63,26 @@ func update_from_map():
 	for j in map.get_height():
 		for i in map.get_width():
 			var cell:WorldMapCell = map.get_cell_v(Vector2i(i, j))
-			
-			if !cell.land:
-				continue
-			
-			if cell.terrain != WorldMapCell.Terrain.DIRT && cell.terrain != WorldMapCell.Terrain.GRASSLAND:
-				continue
+
 				
+			#
+			#if !cell.land:
+				#continue
+		 		
 			var feature:Node3D
 			
-			if cell.vegetation == WorldMapCell.Vegetation.FOREST:
-				feature = trees_scene.instantiate()
-			elif cell.feature == WorldMapCell.Feature.MOUNTAIN:
-				feature = mountain_scene.instantiate()
-			elif cell.feature == WorldMapCell.Feature.HILL:
-				feature = hill_scene.instantiate()
+			if cell.terrain == WorldMapCell.Terrain.OCEAN:
+				feature = ocean_scene.instantiate()
+			
+			elif cell.terrain == WorldMapCell.Terrain.DIRT || cell.terrain == WorldMapCell.Terrain.GRASSLAND:
+			
+				if cell.vegetation == WorldMapCell.Vegetation.FOREST:
+					feature = trees_scene.instantiate()
+					#print("trees ", Vector2i(i, j))
+				elif cell.feature == WorldMapCell.Feature.MOUNTAIN:
+					feature = mountain_scene.instantiate()
+				elif cell.feature == WorldMapCell.Feature.HILL:
+					feature = hill_scene.instantiate()
 			
 			if feature:
 				features.add_child(feature)

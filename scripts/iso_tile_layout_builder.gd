@@ -131,18 +131,19 @@ func build():
 	if !map:
 		return
 		
-	for j in range(-1, map.grid.height + 1):
-		for i in map.grid.width + 1:
-			var coord:Vector2i = Vector2i(i, j)
-			var cell:WorldMapCell = map.get_cell_v(coord)
-			
-			if cell:
-				var tile_coords:Array = get_matching_featutres(feature_layer.tile_set, cell)
-				if tile_coords:
-					#print("iso feature ", coord, " ", cell)
-					var idx:int = rng.randi_range(0, tile_coords.size() - 1)
-#					print("tile_coords[idx] ", Vector2i(i, j), " -> ", tile_coords[idx])
-					#print("tile_coords[idx] ", Vector2i(i, j), " veg: ", cell.vegetation, " fea: ", cell.feature)
-					feature_layer.set_cell(Vector2i(i, j), 0, tile_coords[idx])
+	if false:
+		for j in range(-1, map.grid.height + 1):
+			for i in map.grid.width + 1:
+				var coord:Vector2i = Vector2i(i, j)
+				var cell:WorldMapCell = map.get_cell_v(coord)
+				
+				if cell:
+					var tile_coords:Array = get_matching_featutres(feature_layer.tile_set, cell)
+					if tile_coords:
+						#print("iso feature ", coord, " ", cell)
+						var idx:int = rng.randi_range(0, tile_coords.size() - 1)
+	#					print("tile_coords[idx] ", Vector2i(i, j), " -> ", tile_coords[idx])
+						#print("tile_coords[idx] ", Vector2i(i, j), " veg: ", cell.vegetation, " fea: ", cell.feature)
+						feature_layer.set_cell(Vector2i(i, j), 0, tile_coords[idx])
 
 	
