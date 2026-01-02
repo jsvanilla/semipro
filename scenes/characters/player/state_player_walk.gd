@@ -2,7 +2,7 @@ extends StatePlayerBase
 class_name StatePlayerWalk
 
 @export var state_idle:StateMachineState
-@export var walk_speed:float = 10
+@export var walk_speed:float = 5
 
 func _state_physics_process(_delta:float):
 	if not player.is_on_floor():
