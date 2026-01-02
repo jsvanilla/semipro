@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bhy8ouft8ta1x"]
+[gd_scene load_steps=8 format=3 uid="uid://bhy8ouft8ta1x"]
 
 [ext_resource type="Script" uid="uid://cxylg6m28von0" path="res://scenes/world_3d/tiled_world_3d.gd" id="1_t3tlk"]
 [ext_resource type="PackedScene" uid="uid://bgi58isy7n8i5" path="res://scenes/world_tilemap_2d.tscn" id="2_4vhe1"]
@@ -14,6 +14,8 @@ albedo_texture = SubResource("ViewportTexture_4vhe1")
 texture_filter = 0
 
 [sub_resource type="World3D" id="World3D_80vba"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_4vhe1"]
 
 [node name="TiledWorld3d" type="Node3D"]
 script = ExtResource("1_t3tlk")
@@ -33,3 +35,8 @@ world_3d = SubResource("World3D_80vba")
 
 [node name="tilemaps" parent="SubViewport" instance=ExtResource("2_4vhe1")]
 unique_name_in_owner = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_4vhe1")

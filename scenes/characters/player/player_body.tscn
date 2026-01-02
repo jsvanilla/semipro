@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://cclvchoh6by83"]
+
+[ext_resource type="Script" uid="uid://dx7r4mvr07657" path="res://scenes/state_machine/state_machine.gd" id="1_7uws0"]
+[ext_resource type="Script" uid="uid://b3rg5cd7u87fk" path="res://scenes/characters/player/player_body.gd" id="1_686vu"]
+[ext_resource type="Texture2D" uid="uid://bt0mua0uglfqm" path="res://PLAYER SCENE AND CAMERA SCRIPT/Leonard/KidLeonard_Reposo_Adelante.png" id="2_t61fv"]
+[ext_resource type="Script" uid="uid://3xlaaq3dt620" path="res://scenes/characters/player/state_player_idle.gd" id="3_qd3e3"]
+[ext_resource type="Script" uid="uid://cumat1bi38181" path="res://scenes/characters/player/state_player_walk.gd" id="4_6avc5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7uws0"]
+radius = 0.08544922
+height = 0.55285645
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_686vu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_t61fv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="player_body" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1_686vu")
+
+[node name="state_machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+unique_name_in_owner = true
+script = ExtResource("1_7uws0")
+initial_state = NodePath("idle")
+
+[node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("state_walk", "player", "state_machine")]
+script = ExtResource("3_qd3e3")
+state_walk = NodePath("../walk")
+player = NodePath("../..")
+state_machine = NodePath("..")
+
+[node name="walk" type="Node" parent="state_machine" node_paths=PackedStringArray("state_idle", "player", "state_machine")]
+script = ExtResource("4_6avc5")
+state_idle = NodePath("../idle")
+player = NodePath("../..")
+state_machine = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27801943, 0)
+shape = SubResource("CapsuleShape3D_7uws0")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0.28434956, 0)
+sprite_frames = SubResource("SpriteFrames_686vu")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dxmyg5wclieqg"]
+[gd_scene load_steps=8 format=3 uid="uid://dxmyg5wclieqg"]
 
 [ext_resource type="Script" uid="uid://gohaaefalyw1" path="res://scenes/world_3d/main_game_3d.gd" id="1_7sv0b"]
 [ext_resource type="PackedScene" uid="uid://bhy8ouft8ta1x" path="res://scenes/world_3d/tiled_world_3d.tscn" id="2_lqdvj"]
 [ext_resource type="Resource" uid="uid://bbhsoharb13me" path="res://generated_maps/my_test_map.tres" id="3_ktfsu"]
+[ext_resource type="PackedScene" uid="uid://cclvchoh6by83" path="res://scenes/characters/player/player_body.tscn" id="4_bcm62"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lqdvj"]
 
@@ -19,11 +20,17 @@ script = ExtResource("1_7sv0b")
 [node name="TiledWorld3d" parent="." instance=ExtResource("2_lqdvj")]
 map = ExtResource("3_ktfsu")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.8189418, 0.5738766, 0, -0.5738766, 0.8189418, 0, 1.9313903, 1.467741)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.2267533, 0.97395223, 0, -0.97395223, 0.2267533, -2.9933476, 2.4772928, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_si8o7")
+
+[node name="player" parent="." node_paths=PackedStringArray("camera_mount_point") instance=ExtResource("4_bcm62")]
+camera_mount_point = NodePath("camera_mount_point")
+
+[node name="camera_mount_point" type="Node3D" parent="player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6953311, 0.8296821)
+
+[node name="Camera3D" type="Camera3D" parent="player/camera_mount_point"]
+transform = Transform3D(1, 0, 0, 0, 0.9853157, 0.1707426, 0, -0.1707426, 0.9853157, 0, 0, 0)
