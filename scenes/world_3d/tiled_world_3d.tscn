@@ -1,19 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhy8ouft8ta1x"]
+[gd_scene load_steps=3 format=3 uid="uid://bhy8ouft8ta1x"]
 
 [ext_resource type="Script" uid="uid://cxylg6m28von0" path="res://scenes/world_3d/tiled_world_3d.gd" id="1_t3tlk"]
-[ext_resource type="PackedScene" uid="uid://bgi58isy7n8i5" path="res://scenes/world_tilemap_2d.tscn" id="2_4vhe1"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_t3tlk"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_4vhe1"]
-viewport_path = NodePath("SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4vhe1"]
-resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_4vhe1")
-texture_filter = 0
-
-[sub_resource type="World3D" id="World3D_80vba"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_4vhe1"]
 
@@ -21,20 +8,6 @@ texture_filter = 0
 script = ExtResource("1_t3tlk")
 
 [node name="features" type="Node3D" parent="."]
-unique_name_in_owner = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-unique_name_in_owner = true
-visible = false
-mesh = SubResource("PlaneMesh_t3tlk")
-surface_material_override/0 = SubResource("StandardMaterial3D_4vhe1")
-
-[node name="SubViewport" type="SubViewport" parent="."]
-unique_name_in_owner = true
-own_world_3d = true
-world_3d = SubResource("World3D_80vba")
-
-[node name="tilemaps" parent="SubViewport" instance=ExtResource("2_4vhe1")]
 unique_name_in_owner = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]

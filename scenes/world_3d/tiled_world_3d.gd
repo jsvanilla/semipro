@@ -2,7 +2,7 @@
 extends Node3D
 class_name TiledWorld3D
 
-@onready var world_tilemap:WorldTilemap2D = %tilemaps
+#@onready var world_tilemap:WorldTilemap2D = %tilemaps
 #@onready var subviewport:SubViewport = %SubViewport
 #@onready var ground_mesh:MeshInstance3D = %MeshInstance3D
 @onready var features:Node3D = %features
@@ -13,8 +13,8 @@ class_name TiledWorld3D
 			return
 		map = v
 		
-		if world_tilemap:
-			world_tilemap.map = map
+		#if world_tilemap:
+			#world_tilemap.map = map
 			
 		update_from_map()
 
@@ -24,8 +24,8 @@ class_name TiledWorld3D
 			return
 		map_seed = v
 		
-		if world_tilemap:
-			world_tilemap.map_seed = map_seed
+		#if world_tilemap:
+			#world_tilemap.map_seed = map_seed
 
 @export var tile_size:Vector2i = Vector2i(32, 32):
 	set(v):
@@ -186,14 +186,15 @@ func update_from_map():
 				feature.position = local_pos
 
 func _ready() -> void:
-	world_tilemap.map = map
-	world_tilemap.map_seed = map_seed
+	#world_tilemap.map = map
+	#world_tilemap.map_seed = map_seed
 	update_from_map()
 
 func build_layout_from_map(new_map:WorldMap):
-	world_tilemap.map = new_map
-	world_tilemap.map_seed = map_seed
-	world_tilemap.rebuild_map()
+	#world_tilemap.map = new_map
+	#world_tilemap.map_seed = map_seed
+	#world_tilemap.rebuild_map()
+	return
 	
 func _on_file_dialog_load_file_selected(path: String) -> void:
 	var loaded_map = ResourceLoader.load(path)

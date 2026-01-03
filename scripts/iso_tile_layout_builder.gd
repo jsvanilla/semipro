@@ -131,7 +131,7 @@ func build():
 	if !map:
 		return
 		
-	if false:
+	if true:
 		for j in range(-1, map.grid.height + 1):
 			for i in map.grid.width + 1:
 				var coord:Vector2i = Vector2i(i, j)
