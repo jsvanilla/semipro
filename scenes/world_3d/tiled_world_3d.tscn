@@ -25,6 +25,7 @@ unique_name_in_owner = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
+visible = false
 mesh = SubResource("PlaneMesh_t3tlk")
 surface_material_override/0 = SubResource("StandardMaterial3D_4vhe1")
 

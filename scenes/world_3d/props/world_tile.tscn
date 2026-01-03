@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://brf4s4owesag3"]
+
+[ext_resource type="Script" uid="uid://c4gbk0e2v3yyq" path="res://scenes/world_3d/props/world_tile.gd" id="1_1ukgx"]
+[ext_resource type="Shader" uid="uid://dldcrru7jwo6b" path="res://shaders/world_tile.gdshader" id="1_r3q27"]
+[ext_resource type="Texture2D" uid="uid://dkhrl1fjy7h8l" path="res://tilesets/iso_32x32/grass_layer.png" id="1_sfpm5"]
+[ext_resource type="Texture2D" uid="uid://c133fgtfa3rnb" path="res://tilesets/iso_32x32/continent.png" id="2_k46hc"]
+[ext_resource type="Texture2D" uid="uid://dnt2e4m6gwwj3" path="res://tilesets/iso_32x32/desert_layer.png" id="3_1ukgx"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ktfsu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r3q27"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_r3q27")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo_continent = ExtResource("2_k46hc")
+shader_parameter/texture_albedo_grass = ExtResource("1_sfpm5")
+shader_parameter/texture_albedo_desert = ExtResource("3_1ukgx")
+shader_parameter/cell_continent = 0
+shader_parameter/cell_grass = 1
+shader_parameter/cell_desert = 1
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_1ukgx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("PlaneMesh_ktfsu")
+skeleton = NodePath("../world_tile")
+surface_material_override/0 = SubResource("ShaderMaterial_r3q27")
+
+[node name="world_tile" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="world_tile"]
