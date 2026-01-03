@@ -222,7 +222,7 @@
 		{
 			"alphaMode":"BLEND",
 			"doubleSided":true,
-			"name":"Material.001",
+			"name":"trees",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":0

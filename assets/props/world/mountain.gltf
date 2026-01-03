@@ -33,7 +33,7 @@
 		{
 			"alphaMode":"BLEND",
 			"doubleSided":true,
-			"name":"Material.001",
+			"name":"mountain",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":0
